@@ -10,9 +10,6 @@ import { registerPlugins } from '@/plugins'
 // Components
 import App from './App.vue'
 
-// tailwind base
-import "./index.css"
-
 // Composables
 import { createApp } from 'vue'
 
