@@ -1,5 +1,4 @@
 <template>
     <Header />
-
-    <BookingForm />
+    <OrderHistory />
 </template>
