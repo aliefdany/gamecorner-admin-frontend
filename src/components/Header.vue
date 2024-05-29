@@ -7,19 +7,27 @@
 
 <template>
     <v-app-bar :elevation="2">
-        <template v-slot:prepend>
-            <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        </template>
-
         <v-app-bar-title>FILKOM GameCorner</v-app-bar-title>
 
-        <template v-slot:append>
-            <v-btn icon="mdi-heart"></v-btn>
-
-            <v-btn icon="mdi-magnify"></v-btn>
+        <!-- <template v-slot:append>
 
             <v-btn icon="mdi-dots-vertical"></v-btn>
-        </template>
+        </template> -->
+
+        <v-menu>
+            <template v-slot:activator="{ props }">
+                <v-btn v-bind="props">
+                    <v-icon>mdi-menu</v-icon>
+                </v-btn>
+            </template>
+            <v-list>
+                <v-list-item v-for="item in menuItems" :key="item.title" @click="subItemClick">
+                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
+
+
 
         <template v-slot:extension>
             <v-tabs v-model="tab" align-tabs="title">
@@ -30,10 +38,28 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
+    setup() {
+        const menu = ref(false);
+        const items = [
+            { title: 'Profile' },
+            { title: 'Logout' },
+        ];
+
+        const subItemClick = (item) => {
+            // Perform action based on the clicked item
+            console.log(item.title);
+        };
+
+        return { menu, items, subItemClick };
+    },
     data() {
         return {
             tab: null,
+            menuItems: [{ title: 'Profile' },
+            { title: 'Logout' },],
             items: [
                 'dashboard', 'peminjaman', 'riwayat'
             ],
